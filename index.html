@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Title</title>
+    <title>Spletna stran</title>
     <meta charset="utf-8">
     <style>
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -21,19 +21,225 @@
 
 class: center, middle
 
-# Title
+
+# Bogastvo v zrnih pšenice
+## Navodila za reševanje nalog v programu Excel
 
 ---
 
-# Agenda
+# Opis problema
 
-1. Introduction
-2. Deep-dive
-3. ...
+Mladenič je rešil življenje kraljevi hčerki. Kralj mu je bil zelo hvaležen, 
+zato mu je za nagrado ponudil polovico svojega kraljestva. Mladenič pa to 
+ponudbo zavrne in prosi za drugačno nagrado. 40 dni želi prejemati zrna pšenice: 
+prvi dan naj dobi 2 zrni pšenice, vsak naslednji dan pa naj se količina podvoji. 
+Kralj je globoko užaljen, ker se mladeniču njegova ponudba ni zdela velikodušna 
+in je raje izbral zrna pšenice, zato mu naloži 40 udarcev z bičem. Mladenič obupano 
+moleduje kralja, naj njegovi modri možje preučijo njegovo željo. Kralj nejevoljno 
+naroči modrim možem, naj podrobno preučijo, kako darežljiva je ponudba z zrni pšenice.  
+
+Ali bodo modri možje prepičali kralja, naj se usmili mladeniča? Odpravijo se v 
+kraljevo kaščo in začnejo šteti zrna pšenice.   
+
+Ker je štetje dolgočasno in bi zelo dolgo trajalo, mi pa nimamo dovolj časa in 
+pšenice, bomo vprašanje poskusili odgovoriti s pomočjo eksponentne funkcije in 
+programa Excel.  
 
 ---
 
-# Introduction
+> *Vprašanje:*  
+> **Koliko prostora zavzame $2^{40}$ zrn pšenice?**  
+
+Zanima nas zgolj ocena, ne pa čisto točen volumen. Dovolj bo, če bomo ugotovili 
+ali je količina sprejemljiva za kralja ali je pšenice preveč. Pomagali si bomo z 
+razmerjem med potencami števila 2 in potencami števila 10. Če to razmerje poznamo, 
+lahko ugotovimo red velikosti $ 2^{40} $ in na ta način ocenimo volumen. Ugotovili 
+bomo, da je določena potenca števila 2 skoraj enaka neki potenci števila 10, ki jo 
+že poznamo.  
+
+V nadaljevanju bomo:
+1. določili v kakšnem razmerju so potence števil 2 in 10, 
+2. ocenili potence števila 2 s potencami števila 10, 
+3. utemeljili, da je ta ocena dobra, 
+4. izračunali volumen pšenice. 
+
+Ker so zrna pšenice majhna, njihovo število pa je veliko, si količino težko predstavljamo. 
+Zato bomo za boljšo predstavo za enote volumna vzeli kaj bolj vsakdanjega.  
+
+---
+
+## Potence števila 2
+
+<table border="0">
+    <tr>
+       <td>
+        Oglejmo si naraščanje potenc $2^{n}$. V Excelu ustvari tabelo z vsemi vrednostmi $2^{n}$ 
+        za $n$ med 1 in 40, kot je prikazano na sliki. Za kateri $n$ je vrednost $2^{n}$ 
+        približno enaka neki potenci števila 10? Z drugimi besedami, za kateri naravni števili 
+        $n$ in $m$ velja $2^{n} \approx 10^{m}$?
+       </td>
+       <td>
+        <img src=List1.png alt="List1" width=100>
+       </td>
+    </tr>
+</table>
+
+---
+
+## Razmerje med potencami števil 2 in 10
+
+<table border="0">
+    <tr>
+       <td>
+        V tabelo dodaj stolpca za vrednosti $10^{0,3n}$ in $10^{0,301n}$. Opazuj kakšne 
+        rezultate dobimo v drugih dveh stolpcih v primerjavi s prvim.  
+       </td>
+       <td>
+        <a name="tabela"></a><img src=List2.png alt="List2" width=200>
+       </td>
+    </tr>
+</table>
+
+---
+
+Predpostavimo, da je $2^{10} \approx 10^{3}$. Da dobimo občutek kako pravilna je ta 
+ocena, preuredimo enačbo tako, da iz nje dobimo približek za število 2. Za koliko 
+približek odstopa? Pomagaš si lahko s pravili potenciranja. 
+
+><a name="pravila"></a>*Pravila potenciranja*
+>
+>$x^{n} = \underbrace{(x)(x)...(x)}_\text{n-krat}$  
+>$x^{-n} = \frac{1}{x^{n}}$  
+>$x^{\frac{1}{n}} = n \sqrt{x}$  
+>$x^{a} \times x^{b} = x^{a + b}$  
+>$x^{a} \times y^{a} = (xy)^{a}$  
+>$\frac{x^{a}}{x^{b}} = x^{a} \times x^{-b} = x^{a-b}$  
+>$\frac{x^{a}}{y^{a}} = (\frac{x}{y})^{a}$  
+>$(x^{a})^{b} = x^{ab}$  
+>$x^{0} = 1$  (če je $x \neq 0$)  
+>$x^{\frac{a}{b}} = (b \sqrt{x})^{a}$  
+
+>**Opomba:**  
+>Znak $\approx$ pomeni približno enako.  
+
+---
+
+<table border="0">
+    <tr>
+       <td>
+        <br>
+        V Excelu odpri nov delovni list in v njem tabelo od prej prilagodi, tako da 
+        boš izračunal/a za koliko odstotkov se razlikujejo vrednosti $2^{n}$ od 
+        $10^{0,3n}$. Pomagaš si lahko s sliko na desni.
+        </br>
+
+        <br>
+        Iz tabele lahko opazimo:
+        </br>
+        
+        <br>$2^{10} \approx 10^{3}$ (tisoč)</br>  
+        <br>$2^{20} \approx 10^{6}$ (milijon)</br>  
+        <br>$2^{30} \approx 10^{9}$ (milijarda)</br>  
+        <br>$2^{40} \approx 10^{12}$ (bilijon)</br>
+
+        <br>
+        Prepričaj se, da ko poznaš prvega izmed zgornjih približkov, s pomočjo 
+        pravil potenciranja lahko izračunaš tudi vse ostale.
+        </br>
+       <td>
+        <img src=List3.png alt="List3" width=300 style="vertical-align:middle;margin:50px 0px">
+       </td>
+    </tr>
+</table>
+
+---
+
+## Volumen pšenice 
+
+Kakšen je torej red velikosti $2^{40}$ in kakšen je volumen pšenice?  
+
+Napaka, ki jo dobimo pri naši oceni je dovolj majhna, da je sprejemljiva za našo nalogo.  
+
+Volumen pšenice bomo podali v litrih in kubičnih metrih. En liter zavzame volumen kocke s 
+stranico 100mm. Kubični meter vsebuje 1000 litrov.  
+
+Kolikšen volumen zavzame $10^{12}$ oz. bilijon zrn pšenice? 
+
+V Excelu odpri nov delovni list in tabelo od prej v njem prilagodi tako, da število zrn 
+pšenice predstaviš v litrih in kubičnih metrih. Denimo, da zrno pšenice meri 
+$2mm \times 3mm \times 8mm$. Za približek volumna enega zrna zato vzamemo $50 mm^3$. 
+Prepričaj se, da iz tega sledi, da je v enem litru $2 \times 10^{4}$ zrn in v enem kubičnem 
+metru $2 \times 10^{7}$ zrn pšenice.  
+
+V pomoč ti je lahko, da na najprej pretvoriš število zrn v kubične milimetre in nato kubične 
+milimetre v litre ter kubične metre. 
+
+---
+
+<table border="0">
+    <tr>
+       <td>
+        <br>
+        Za formule v stolpcu C si lahko pomagaš s tabelo, ki si jo naredil/a v prvem delovnem 
+        listu. Nato ugotovi še kako izračunaš vrednosti v stolpcih D, E in F. Preveri svoje 
+        rešitve s pomočjo tabele na desni.  
+        </br>
+
+        <br>
+        Sedaj lahko ugotovimo kolikšen volumen zavzame pšenica:  
+        </br>
+        <br>
+        $2^{40}$ zrn $= 1000^{4}$ zrn $= 10^{12}$ zrn $= 50E + 12 mm^{3} = 50E + 6L = \mathbf{50.000 m^{3}} $ 
+        </br>
+             
+       </td>
+       <td>
+        <img src=List4.png alt="List4" width=250 style="vertical-align:middle;margin:50px 0px">
+       </td>
+    </tr>
+</table>
+
+---
+
+## Za lažjo predstavo  
+
+<table border="0">
+    <tr>
+       <td>
+        <br>
+        Za lažjo predstavo bomo izračunali, koliko <i>tovornjakov</i> bi napolnili z našo količino pšenice. 
+        Predpostavimo, da ima en tovornjak $40m^{2}$ prostora. V tabelo dodaj še en stolpec, 
+        in vanj vnesi število tovornjakov, ki bi jih napolnili z določeno količino pšenice. Koliko 
+        tovornjakov bi potrebovali, da bi prepeljali mladeničevo pšenico? Ali je bil kralj upravičeno užaljen? 
+        </br>
+
+        <br>
+        <b>Opomba:</b> 
+        Pri izračunu domnevamo, da zrna pšenice ležijo tesno drug ob drugem, torej vmes ni nič praznega prostora. 
+        To sicer pomeni, da bi v resnici potrebovali še več tovornjakov, vendar je ocena dovolj dobra za 
+        predstavo o količini pšenice. 
+        </br>
+             
+       </td>
+       <td>
+        <img src=List5.png alt="List5" width=250 style="vertical-align:middle;margin:20px 0px">
+       </td>
+    </tr>
+</table>
+
+---
+
+## Zaključek  
+
+Vrnimo se k modrim možem. Utrujeni in siti štetja ugotovijo, da kraljeva kašča ne vsebuje dovolj pšenice za 
+mladeniča. Ko kralj sliši to novico, zaprepadeno obstane na mestu in ne ve, kaj mu je storiti. Osramočen stopi 
+pred mladeniča, mu prizna svojo zmoto in ponudi kakšno drugo darilo. Mladenič pa zavrne vsa darila in namesto 
+tega zaprosi kraljevo hčer za roko. Hči, navdušena nad mladeničem, vzhičeno privoli in srečno živita do konca 
+svojih dni. 
+
+
+
+
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
@@ -41,5 +247,20 @@ class: center, middle
     <script>
       var slideshow = remark.create();
     </script>
+
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
   </body>
 </html>
