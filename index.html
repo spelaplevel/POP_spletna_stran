@@ -242,9 +242,11 @@ pred mladeniča, mu prizna svojo zmoto in ponudi kakšno drugo darilo. Mladenič
 tega zaprosi kraljevo hčer za roko. Hči, navdušena nad mladeničem, vzhičeno privoli in srečno živita do konca 
 svojih dni. 
 
+Prosim, če rešiš še anketo o nalogi, ki je dostopna na tej [povezavi](https://forms.gle/2AiTaV6PyHs8ZUCm6). 
 
-
-
+<center>
+  <button class="gumb" onclick="klik()">Rešil/a sem anketo!</button> <label id="na-klik"></label>
+</center>
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
@@ -252,6 +254,12 @@ svojih dni.
     <script>
       var slideshow = remark.create();
     </script>
+
+<script>
+  function klik() {
+    document.getElementById("na-klik").innerHTML = "Super! Naloga je zaključena!"
+  }
+</script>
 
 <script>
     MathJax = {
